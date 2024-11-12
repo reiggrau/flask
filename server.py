@@ -3,7 +3,7 @@
 # py -3 -m venv .venv
 #
 # 2 - Activate the environment
-# .venv\Scripts\activate
+# source .venv\Scripts\activate
 #
 # 3 - Install Flask
 # pip install Flask
@@ -26,7 +26,17 @@ def index():
 @app.route('/weather')
 def get_weather():
     city = request.args.get('city')
+
+    # Check for empty strings or empty spaces
+    if not bool(city.strip()):
+        city = 'Barcelona'  # Default
+
     weather_data = get_current_weather(city)
+
+    # Check for city not found
+    if not weather_data['cod'] == 200:
+        return render_template('city-not-found.html')
+
     return render_template(
         "weather.html",
         title=weather_data['name'],
