@@ -3,7 +3,7 @@
 # py -3 -m venv .venv
 #
 # 2 - Activate the environment
-# source .venv\Scripts\activate
+# source .venv/Scripts/activate
 #
 # 3 - Install Flask
 # pip install Flask
